@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -22,13 +23,18 @@ public class LightTimerBlockEntity extends BlockEntity {
 
     @Override
     public void readNbt(NbtCompound nbt) {
-        ticksExisted = nbt.getInt("ticksExisted");
         super.readNbt(nbt);
+
+        ticksExisted = nbt.getInt("ticksExisted");
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, LightTimerBlockEntity lightTimerBlockEntity) {
         ++lightTimerBlockEntity.ticksExisted;
-        if (lightTimerBlockEntity.ticksExisted > 15) {
+
+//        if(world.getBlockState(pos).getBlock() == LinternaMod.LIGHT_AIR_BLOCK) {
+//            world.addParticle(ParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
+//        }
+        if (lightTimerBlockEntity.ticksExisted > 10 && world.getBlockState(pos).getBlock() == LinternaMod.LIGHT_AIR_BLOCK) {
             world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
             world.removeBlockEntity(pos);
         }

@@ -1,7 +1,6 @@
 package binaris.linterna.block;
 
 import binaris.linterna.LinternaMod;
-import binaris.linterna.item.LinternaItem;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -21,6 +20,8 @@ public class LightAirBlock extends AirBlock implements BlockEntityProvider {
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new LightTimerBlockEntity(pos, state);
     }
+
+
 
     @Nullable
     @Override
