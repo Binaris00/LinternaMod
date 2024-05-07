@@ -19,19 +19,18 @@ import org.slf4j.LoggerFactory;
 public class LinternaMod implements ModInitializer {
 	public static final String MOD_ID = "linterna-mod";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-
 	public static final Identifier PACKET_ID = new Identifier(MOD_ID, "light_timer_packet");
 
 	// =================== Registries ===================
 	public static Item LINTERNA_ITEM = new LinternaItem();
 	public static Block LIGHT_AIR_BLOCK = new LightAirBlock();
 
+
 	public static final BlockEntityType<LightTimerBlockEntity> LIGHT_TIMER_BLOCK_ENTITY = Registry.register(
 			Registries.BLOCK_ENTITY_TYPE,
 			new Identifier(MOD_ID, "linterna_block_entity"),
 			FabricBlockEntityTypeBuilder.create(LightTimerBlockEntity::new, LIGHT_AIR_BLOCK).build()
 	);
-
 
 	@Override
 	public void onInitialize() {

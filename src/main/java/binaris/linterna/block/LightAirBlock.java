@@ -21,8 +21,6 @@ public class LightAirBlock extends AirBlock implements BlockEntityProvider {
         return new LightTimerBlockEntity(pos, state);
     }
 
-
-
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {

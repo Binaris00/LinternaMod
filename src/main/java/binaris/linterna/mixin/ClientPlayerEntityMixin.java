@@ -19,11 +19,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPlayerEntity.class)
 public class ClientPlayerEntityMixin {
+    /** Rango de la linterna */
     @Unique
     private int range = 32;
     @Unique
     ClientPlayerEntity player = (ClientPlayerEntity)(Object)this;
 
+    // Verifica si el jugador tiene la linterna activa y si es asi, crea la luz
     @Inject(method = "tick", at = @At("TAIL"))
     public void LINTERNA$tick(CallbackInfo ci){
         if(player.getMainHandStack().getItem() instanceof LinternaItem && player.getMainHandStack().getOrCreateNbt().getBoolean("active")){
@@ -38,6 +40,12 @@ public class ClientPlayerEntityMixin {
 
     }
 
+    /**
+     * Metodo que calcula la posicion a la que se va a crear la luz
+     * Usando un raycast para saber la posicion a la que esta mirando el jugador
+     * y asi crear la luz en esa posicion o en la mas cercana posible, si la posicion
+     * a la que esta mirando el jugador no es valida para crear la luz (ya hay un bloque)...
+     * */
     @Unique
     private void createLight(ClientPlayerEntity player, int lightRange) {
         World world = player.getEntityWorld();
@@ -94,6 +102,10 @@ public class ClientPlayerEntityMixin {
 
 
 
+    /**
+     * Metodo que devuelve la posicion a la que esta mirando el jugador
+     * Usa solo para el raycast del cliente
+     * */
     @Unique
     private BlockPos lookingAt(ClientPlayerEntity player, int rangeL) {
         Vec3d pos = player.raycast(rangeL, 0.0F, false).getPos();

@@ -14,9 +14,7 @@ public final class FabricPacketHandler {
 
             server.execute(() ->
             {
-                if(world.getBlockEntity(pos) instanceof LightTimerBlockEntity lightTimerBlockEntity
-                        && lightTimerBlockEntity.ticksExisted > 0 && world.getBlockState(pos).getBlock() == LinternaMod.LIGHT_AIR_BLOCK){
-
+                if(world.getBlockEntity(pos) instanceof LightTimerBlockEntity lightTimerBlockEntity && world.getBlockState(pos).getBlock() == LinternaMod.LIGHT_AIR_BLOCK){
                     lightTimerBlockEntity.ticksExisted = 0;
                 } else {
                     world.setBlockState(pos, LinternaMod.LIGHT_AIR_BLOCK.getDefaultState());
